@@ -29,9 +29,12 @@ spec:
         emptyDir: {}
       containers:
       - name: metrics-server
-        image: k8s.gcr.io/metrics-server-amd64:v0.3.1
+        image: gcr.io/google_containers/metrics-server-amd64:v0.2.1
         imagePullPolicy: Always
+        #issue-97 start
+        command:
+        - /metrics-server
+        - --source=kubernetes:https://kubernetes.default
         volumeMounts:
         - name: tmp-dir
           mountPath: /tmp
-
